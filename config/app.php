@@ -1,5 +1,7 @@
 <?php
 
+use GenTux\Jwt\Support\LaravelServiceProvider;
+
 return [
 
     /*
@@ -135,7 +137,7 @@ return [
     */
 
     'providers' => [
-
+        GenTux\Jwt\Support\LaravelServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
          */
