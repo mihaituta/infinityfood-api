@@ -17,19 +17,13 @@ class User extends Model implements JwtPayloadInterface
     use Authenticatable;
 
     /** @var int */
-    const STATUS_ACTIVE = 1;
+    const ROLE_ADMIN = 'Admin';
 
     /** @var int */
-    const STATUS_INACTIVE = 0;
+    const ROLE_STAFF = 'Staff';
 
     /** @var int */
-    const ROLE_ADMIN = 1;
-
-    /** @var int */
-    const ROLE_STAFF = 2;
-
-    /** @var int */
-    const ROLE_USER = 3;
+    const ROLE_USER = 'User';
 
     /**
      * The attributes that are mass assignable.
@@ -40,7 +34,6 @@ class User extends Model implements JwtPayloadInterface
         'name',
         'email',
         'role_id',
-        'status',
         'forgot_code'
     ];
 

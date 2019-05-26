@@ -24,77 +24,6 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function adminLogin(Request $request, User $userModel, JwtToken $jwtToken)
-    {
-        try {
-            $rules = [
-                'email' => 'required|email',
-                'password' => 'required'
-            ];
-
-            $validator = Validator::make($request->all(), $rules);
-
-            if (!$validator->passes()) {
-                return $this->returnBadRequest('Please fill all required fields');
-            }
-
-            $user = $userModel->login($request->email, $request->password);
-
-            if (!$user) {
-                return $this->returnNotFound('Invalid credentials');
-            }
-
-            if ($user->role_id !== User::ROLE_ADMIN) {
-                return $this->returnNoAccess('You need to be an admin to access this route');
-            }
-
-            $token = $jwtToken->createToken($user);
-
-            $data = [
-                'jwt' => $token->token()
-            ];
-
-            return $this->returnSuccess($data);
-        } catch (\Exception $e) {
-            return $this->returnError($e->getMessage());
-        }
-    }
-
-    public function staffLogin(Request $request, User $userModel, JwtToken $jwtToken)
-    {
-        try {
-            $rules = [
-                'email' => 'required|email',
-                'password' => 'required'
-            ];
-
-            $validator = Validator::make($request->all(), $rules);
-
-            if (!$validator->passes()) {
-                return $this->returnBadRequest('Please fill all required fields');
-            }
-
-            $user = $userModel->login($request->email, $request->password);
-
-            if (!$user) {
-                return $this->returnNotFound('Invalid credentials');
-            }
-
-            if ($user->role_id !== User::ROLE_STAFF) {
-                return $this->returnNoAccess('You need to be a staff manager to access this route');
-            }
-
-            $token = $jwtToken->createToken($user);
-
-            $data = [
-                'jwt' => $token->token()
-            ];
-
-            return $this->returnSuccess($data);
-        } catch (\Exception $e) {
-            return $this->returnError($e->getMessage());
-        }
-    }
 
     public function login(Request $request, User $userModel, JwtToken $jwtToken)
     {
@@ -156,7 +85,6 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->status = User::STATUS_INACTIVE;
             $user->role_id = User::ROLE_USER;
 
             $user->save();

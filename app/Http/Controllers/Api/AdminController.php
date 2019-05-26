@@ -37,15 +37,21 @@ class AdminController extends Controller
     {
         try {
             $rules = [
-                'name' => 'required',
+                'name' => 'required|unique:users',
                 'email' => 'required|email|unique:users',
-                'password' => 'required'
+                'password' => 'required',
+                'role_id' => 'required|regex:/^[a-zA-Z]+$/u'
             ];
 
-            $validator = Validator::make($request->all(), $rules);
+            $messages = [
+                'name.unique' => 'uniqueName',
+                'email.unique' => 'uniqueEmail',
+            ];
+
+            $validator = Validator::make($request->all(), $rules,$messages);
 
             if (!$validator->passes()) {
-                return $this->returnBadRequest('Please fill all required fields');
+                return $this->returnError($validator->errors()->first());
             }
 
             $user = new User();
@@ -53,8 +59,7 @@ class AdminController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->status = $request->has('status') ? $request->status : User::STATUS_ACTIVE;
-            $user->role_id = $request->has('role') ? $request->role : User::ROLE_USER;
+            $user->role_id = $request->role_id;
 
             $user->save();
 
@@ -77,6 +82,22 @@ class AdminController extends Controller
         try {
             $user = User::find($id);
 
+            $rules = [
+                'name' => 'unique:users',
+                'email' => 'email|unique:users',
+            ];
+
+            $messages = [
+                'name.unique' => 'uniqueName',
+                'email.unique' => 'uniqueEmail',
+            ];
+
+            $validator = Validator::make($request->all(), $rules,$messages);
+
+            if (!$validator->passes()) {
+                return $this->returnError($validator->errors()->first());
+            }
+
             if ($request->has('name')) {
                 $user->name = $request->name;
             }
@@ -95,12 +116,8 @@ class AdminController extends Controller
                 $user->password = Hash::make($request->password);
             }
 
-            if ($request->has('status')) {
-                $user->status = $request->status;
-            }
-
-            if ($request->has('role')) {
-                $user->role_id = $request->role;
+            if ($request->has('role_id')) {
+                $user->role_id = $request->role_id;
             }
 
             $user->save();

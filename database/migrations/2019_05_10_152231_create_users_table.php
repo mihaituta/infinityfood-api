@@ -19,8 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
-            $table->tinyInteger('status');
-            $table->integer('role_id');
+            $table->string('role_id');
             $table->string('forgot_code', 10)->nullable();
         });
     }

@@ -21,7 +21,7 @@ class MenuController extends Controller
         try {
             $user = $this->validateSession();
             $store = Store::where('user_id', $user->id)->first();
-            $menus = Menu::where('store_id', $store->id)->paginate(10);
+            $menus = Menu::where('store_id', $store->id)->get();
 
             return $this->returnSuccess($menus);
         } catch (\Exception $e) {
@@ -48,14 +48,21 @@ class MenuController extends Controller
                 'price' => 'required',
                 'image' => 'required|image',
                 'type' => 'required',
-                'store_id' => 'exists:stores,id'
+                'store_id' => 'exists:stores,id',
+
+            ];
+            $messages = [
+                    'name.unique' => 'nameTaken'
             ];
 
-            $validator = Validator::make($request->all(), $rules);
+            $validator = Validator::make($request->all(), $rules, $messages);
 
             if (!$validator->passes()) {
-                return $this->returnBadRequest('An item with this name already exists');
+                //return $this->returnBadRequest('Please fill all required fields');
+              return $this->returnError($validator->errors()->first());
+
             }
+
 
             $menu = new Menu();
 
@@ -93,10 +100,13 @@ class MenuController extends Controller
                 'name' => 'unique:menus,name,'.$menu->id.',id,store_id,'.$store->id,
             ];
 
-            $validator = Validator::make($request->all(), $rules);
+            $messages = [
+                'name.unique' => 'nameTaken'
+            ];
+            $validator = Validator::make($request->all(), $rules,$messages);
 
             if (!$validator->passes()) {
-                return $this->returnBadRequest('An item with this name already exists');
+                return $this->returnError($validator->errors()->first());
             }
 
             if ($menu->store_id !== $store->id) {
