@@ -17,8 +17,8 @@ class CreateStoresTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('name', 100);
-            $table->string('url', 100);
-            // $table->text('description');
+            $table->string('slug', 100);
+            $table->string('previewDescription',200);
             $table->integer('user_id');
             $table->integer('images_id');
         });

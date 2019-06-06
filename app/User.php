@@ -86,31 +86,4 @@ class User extends Model implements JwtPayloadInterface
     {
         return $this->hasOne('App/Store');
     }
-
-    /**
-     * Login user
-     *
-     * @param $userEmail
-     * @param $userPassword
-     *
-     * @return bool
-     */
-    public function login($userEmail, $userPassword)
-    {
-        $user = $this->where([
-            'email' => $userEmail,
-        ])->get()->first();
-
-        if (!$user) {
-            return false;
-        }
-
-        $password = $user->password;
-
-        if (app('hash')->check($userPassword, $password)) {
-            return $user;
-        }
-
-        return false;
-    }
 }

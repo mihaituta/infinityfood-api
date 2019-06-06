@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-
 /** Routes that doesn't require auth */
 Route::group(['namespace' => 'Api'], function () {
     /** Routes you can access as staff member only */
@@ -22,6 +21,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/register', 'UserController@register');
     Route::post('/forgot-password', 'UserController@forgotPassword');
     Route::post('/change-password', 'UserController@changePassword');
+    Route::get('/stores','StoreController@getStores');
+    Route::get('/store/{url}','StoreController@getStore');
 });
 
 /** Routes with auth */

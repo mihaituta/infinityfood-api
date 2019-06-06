@@ -25,25 +25,29 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function login(Request $request, User $userModel, JwtToken $jwtToken)
+    public function login(Request $request, JwtToken $jwtToken)
     {
         try {
             $rules = [
-                'email' => 'required|email',
+                'email' => 'required|email|exists:users,email',
                 'password' => 'required'
             ];
 
-            $validator = Validator::make($request->all(), $rules);
+            $messages = [
+                'email.exists' => 'invalidEmail',
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
 
             if (!$validator->passes()) {
-                return $this->returnBadRequest('Please fill all required fields');
+                return $this->returnError($validator->errors()->first());
             }
 
+            $user = User::where(['email' => $request->email,])->get()->first();
+            $password = $user->password;
 
-            $user = $userModel->login($request->email, $request->password);
-
-            if (!$user) {
-                return $this->returnNotFound('Invalid credentials');
+            if (!app('hash')->check($request->password, $password)) {
+                return $this->returnError('invalidPassword');
             }
 
             $token = $jwtToken->createToken($user);

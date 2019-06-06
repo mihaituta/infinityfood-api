@@ -6,25 +6,19 @@ use App\Store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class StoreController extends Controller
 {
     /**
-     * Get Menu list
+     * Get stores list
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAll()
+    public function getStores()
     {
         try {
-            $user = $this->validateSession();
-
-            if ($user->role_id === User::ROLE_ADMIN) {
-                $stores = Store::where('assign', $user->id)->paginate(10);
-            } else {
-                $stores = Store::paginate(10);
-            }
-
+            $stores = Store::all();
             return $this->returnSuccess($stores);
         } catch (\Exception $e) {
             return $this->returnError($e->getMessage());
@@ -32,7 +26,21 @@ class StoreController extends Controller
     }
 
     /**
-     * Create a menu
+     * Get store by id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getStore($slug)
+    {
+        try {
+            $store = Store::where('slug','=', $slug)->firstOrFail();
+            return $this->returnSuccess($store);
+        } catch (\Exception $e) {
+            return $this->returnError($e->getMessage());
+        }
+    }
+    /**
+     * Create a store
      *
      * @param Request $request
      *
@@ -45,7 +53,7 @@ class StoreController extends Controller
 
             $rules = [
                 'name' => 'required|unique:stores',
-                'url' => 'required|unique:stores',
+                'slug' => 'unique:stores',
                 'user_id' => 'nullable|exists:users,id',
                 'images_id' => 'required'
             ];
@@ -59,7 +67,7 @@ class StoreController extends Controller
             $store = new Store();
 
             $store->name = $request->name;
-            $store->url = $request->url;
+            $store->slug = Str::slug($request->name, "-");
             $store->user_id = $request->user_id;
             $store->images_id = $request->images_id;
 
