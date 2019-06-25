@@ -23,7 +23,19 @@ class MenuController extends Controller
             $store = Store::where('user_id', $user->id)->first();
             $menus = Menu::where('store_id', $store->id)->get();
 
-            return $this->returnSuccess($menus);
+            $types = [];
+
+            foreach ($menus as $key => $menu ) {
+                $types[$key] = $menu->type;
+            }
+
+            $uniqueValues = array_unique((array)$types);
+
+            $order = ['Felul întâi', 'Fel principal', 'Fastfood', 'Pizza', 'Desert', 'Băuturi'];
+
+            $orderedTypes = array_values(array_intersect($order, $uniqueValues));
+
+            return $this->returnSuccess(['types' => $orderedTypes,'menus' => $menus]);
         } catch (\Exception $e) {
             return $this->returnError($e->getMessage());
         }
@@ -58,7 +70,6 @@ class MenuController extends Controller
             $validator = Validator::make($request->all(), $rules, $messages);
 
             if (!$validator->passes()) {
-                //return $this->returnBadRequest('Please fill all required fields');
               return $this->returnError($validator->errors()->first());
 
             }

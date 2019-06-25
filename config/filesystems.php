@@ -63,9 +63,9 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
-        'shop-images' => [
+        'restaurant-images' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/shop-images'),
+            'root' => storage_path('app/public/restaurant-images'),
             'visibility' => 'public',
         ],
         'menu-images' => [

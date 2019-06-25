@@ -13,15 +13,26 @@ class CreateStoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('stores', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
-            $table->string('name', 100);
-            $table->string('slug', 100);
-            $table->string('previewDescription',200);
-            $table->integer('user_id');
-            $table->integer('images_id');
-        });
+        if (!Schema::hasTable('stores')) {
+            Schema::create('stores', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->timestamps();
+                $table->string('name', 100);
+                $table->string('slug', 100);
+                $table->integer('user_id');
+                $table->text('city');
+                $table->string('previewDescription', 200);
+                $table->string('previewImage', 100);
+                $table->string('backgroundImage', 100);
+                $table->string('logoImage', 100)->nullable();
+                $table->text('contactText')->nullable();
+                $table->string('phone1', 50);
+                $table->string('phone2', 50)->nullable();
+                $table->string('mail1', 50);
+                $table->string('mail2', 50)->nullable();
+                $table->text('aboutText')->nullable();
+            });
+        }
     }
 
     /**

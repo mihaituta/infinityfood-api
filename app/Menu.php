@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     /** @var string */
-    const TYPE_STARTER = 'Starter';
+    const TYPE_STARTER = 'Felul întâi';
 
     /** @var string */
-    const TYPE_MAIN = 'Main';
+    const TYPE_MAIN = 'Fel principal';
 
     /** @var string */
-    const TYPE_DESSERT = 'Dessert';
+    const TYPE_DESSERT = 'Desert';
 
     /** @var string */
     const TYPE_FASTFOOD = 'Fastfood';
@@ -22,7 +22,7 @@ class Menu extends Model
     const TYPE_PIZZA = 'Pizza';
 
     /** @var string */
-    const TYPE_DRINK = 'Drink';
+    const TYPE_DRINK = 'Băuturi';
 
     /**
      * The attributes that are mass assignable.
