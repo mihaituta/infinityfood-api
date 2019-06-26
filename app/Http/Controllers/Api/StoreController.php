@@ -29,11 +29,26 @@ class StoreController extends Controller
     }
 
     /**
+     * Get stores previews
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getStoresPreview()
+    {
+        try {
+            $stores = Store::all('name','slug','city','previewDescription','previewImage');
+            return $this->returnSuccess($stores);
+        } catch (\Exception $e) {
+            return $this->returnError($e->getMessage());
+        }
+    }
+
+    /**
      * Get store by id
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getStore($slug)
+    public function getStoreComplete($slug)
     {
         try {
             $store = Store::where('slug', '=', $slug)->firstOrFail();
@@ -52,6 +67,17 @@ class StoreController extends Controller
             $orderedTypes = array_values(array_intersect($order, $uniqueValues));
 
             return $this->returnSuccess(['store' => $store, 'types' => $orderedTypes, 'menus' => $menus]);
+        } catch (\Exception $e) {
+            return $this->returnError($e->getMessage());
+        }
+    }
+
+    public function getStore()
+    {
+        try {
+            $user = $this->validateSession();
+            $store = Store::where('user_id', $user->id)->first();
+            return $this->returnSuccess($store);
         } catch (\Exception $e) {
             return $this->returnError($e->getMessage());
         }
@@ -213,8 +239,80 @@ class StoreController extends Controller
         }
     }
 
+    public function staffUpdateStore(Request $request)
+    {
+        try {
+            $rules = [
+                'name' => 'unique:stores',
+            ];
+
+            $messages = [
+                'name.unique' => 'nameTaken'
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if (!$validator->passes()) {
+                return $this->returnError($validator->errors()->first());
+            }
+
+            $user = $this->validateSession();
+            $store = Store::where('user_id', $user->id)->first();
+
+            if ($request->has('name')) {
+                $store->name = $request->name;
+                $store->slug = Str::slug($store->name, "-");
+            }
+
+            if ($request->has('city'))
+                $store->city = $request->city;
+
+            if ($request->has('previewDescription'))
+                $store->previewDescription = $request->previewDescription;
+
+            if ($request->hasFile('previewImage')) {
+                Storage::disk('menu-images')->delete($store->previewImage);
+                $store->previewImage = $request->file('previewImage')->store($store->slug, 'restaurant-images');
+            }
+
+            if ($request->hasFile('backgroundImage')) {
+                Storage::disk('menu-images')->delete($store->backgroundImage);
+                $store->backgroundImage = $request->file('backgroundImage')->store($store->slug, 'restaurant-images');
+            }
+
+            if ($request->hasFile('logoImage')) {
+                Storage::disk('menu-images')->delete($store->logoImage);
+                $store->logoImage = $request->file('logoImage')->store($store->slug, 'restaurant-images');
+            }
+
+            if ($request->has('contactText'))
+                $store->contactText = $request->contactText;
+
+            if ($request->has('phone1'))
+                $store->phone1 = $request->phone1;
+
+            if ($request->has('phone2'))
+                $store->phone2 = $request->phone2;
+
+            if ($request->has('mail1'))
+                $store->mail1 = $request->mail1;
+
+            if ($request->has('mail2'))
+                $store->mail2 = $request->mail2;
+
+            if ($request->has('aboutText'))
+                $store->aboutText = $request->aboutText;
+
+            $store->save();
+
+            return $this->returnSuccess();
+        } catch (\Exception $e) {
+            return $this->returnError($e->getMessage());
+        }
+    }
+
     /**
-     * Delete a task
+     * Delete store
      *
      * @param $id
      *

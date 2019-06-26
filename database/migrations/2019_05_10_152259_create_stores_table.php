@@ -24,13 +24,13 @@ class CreateStoresTable extends Migration
                 $table->string('previewDescription', 200);
                 $table->string('previewImage', 100);
                 $table->string('backgroundImage', 100);
-                $table->string('logoImage', 100)->nullable();
-                $table->text('contactText')->nullable();
+                $table->string('logoImage', 100);
+                $table->text('contactText');
                 $table->string('phone1', 50);
-                $table->string('phone2', 50)->nullable();
+                $table->string('phone2', 50);
                 $table->string('mail1', 50);
-                $table->string('mail2', 50)->nullable();
-                $table->text('aboutText')->nullable();
+                $table->string('mail2', 50);
+                $table->text('aboutText');
             });
         }
     }

@@ -21,12 +21,13 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/register', 'UserController@register');
     Route::post('/forgot-password', 'UserController@forgotPassword');
     Route::post('/change-password', 'UserController@changePassword');
-    Route::get('/stores','StoreController@getStores');
-    Route::get('/store/{url}','StoreController@getStore');
+    Route::get('/stores-complete', 'StoreController@getStores');
+    Route::get('/stores', 'StoreController@getStoresPreview');
+    Route::get('/store-complete/{url}', 'StoreController@getStoreComplete');
 });
 
 /** Routes with auth */
-Route::group(['namespace' => 'Api','middleware' => 'jwt'], function () {
+Route::group(['namespace' => 'Api', 'middleware' => 'jwt'], function () {
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'UserController@get');
         Route::patch('/', 'UserController@update');
@@ -45,8 +46,11 @@ Route::group(['namespace' => 'Api','middleware' => 'jwt'], function () {
         });
     });
 
+    /** Routes you can access as staff member only */
     Route::group(['prefix' => 'staff', 'middleware' => 'staff'], function () {
         Route::get('/menus', 'MenuController@getMenus');
+        Route::get('/store', 'StoreController@getStore');
+        Route::patch('/store', 'StoreController@staffUpdateStore');
         Route::group(['prefix' => 'menu'], function () {
             Route::post('/add', 'MenuController@createMenu');
             Route::patch('/{id}', 'MenuController@updateMenu');
