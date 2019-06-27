@@ -80,7 +80,7 @@ class MenuController extends Controller
             $menu->name = $request->name;
             $menu->description = $request->description;
             $menu->price = $request->price;
-            $menu->image = $request->file('image')->store($store->name, 'menu-images');
+            $menu->image = $request->file('image')->store($store->slug, 'menu-images');
             $menu->type = $request->type;
             $menu->store_id = $store->id;
 
@@ -138,7 +138,7 @@ class MenuController extends Controller
 
             if ($request->hasFile('image')) {
                 Storage::disk('menu-images')->delete($menu->image);
-                $menu->image = $request->file('image')->store($store->name, 'menu-images');
+                $menu->image = $request->file('image')->store($store->slug, 'menu-images');
             }
 
             if ($request->has('type')) {
@@ -170,7 +170,6 @@ class MenuController extends Controller
                 return $this->returnError('You don\'t have permission to delete this menu');
             }
 
-            //$menu = Menu::where('id',$id)->where('store_id',$store->id)->firstOrFail();
             Storage::disk('menu-images')->delete($menu->image);
             $menu->delete();
 

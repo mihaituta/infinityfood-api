@@ -23,6 +23,7 @@ class CreateMenusTable extends Migration
                 $table->string('image', 100);
                 $table->string('type', 50);
                 $table->integer('store_id');
+                $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             });
         }
     }

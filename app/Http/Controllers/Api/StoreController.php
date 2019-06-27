@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Menu;
 use App\Store;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +23,8 @@ class StoreController extends Controller
     {
         try {
             $stores = Store::all();
-            return $this->returnSuccess($stores);
+            $users = User::select('id','name')->where('role_id','Staff')->get();
+            return $this->returnSuccess(['restaurants'=>$stores,'users'=>$users]);
         } catch (\Exception $e) {
             return $this->returnError($e->getMessage());
         }
@@ -96,22 +98,22 @@ class StoreController extends Controller
             $rules = [
                 'name' => 'required|unique:stores',
                 'slug' => 'unique:stores',
-                'user_id' => 'nullable|exists:users,id',
+                'user_id' => 'required|exists:users,id',
                 'city' => 'required',
                 'previewDescription' => 'required',
                 'previewImage' => 'required|image',
                 'backgroundImage' => 'required|image',
-                'logoImage' => 'image',
-                'contactText',
+                'logoImage' => 'required|image',
+                'contactText' => 'required',
                 'phone1' => 'required',
-                'phone2',
+                'phone2'=> 'required',
                 'mail1' => 'required',
-                'mail2',
-                'aboutText',
+                'mail2'=> 'required',
+                'aboutText'=> 'required',
             ];
 
             $messages = [
-
+                'name.unique' => 'nameTaken'
             ];
 
             $validator = Validator::make($request->all(), $rules, $messages);
@@ -199,17 +201,17 @@ class StoreController extends Controller
                 $store->previewDescription = $request->previewDescription;
 
             if ($request->hasFile('previewImage')) {
-                Storage::disk('menu-images')->delete($store->previewImage);
+                Storage::disk('restaurant-images')->delete($store->previewImage);
                 $store->previewImage = $request->file('previewImage')->store($store->slug, 'restaurant-images');
             }
 
             if ($request->hasFile('backgroundImage')) {
-                Storage::disk('menu-images')->delete($store->backgroundImage);
+                Storage::disk('restaurant-images')->delete($store->backgroundImage);
                 $store->backgroundImage = $request->file('backgroundImage')->store($store->slug, 'restaurant-images');
             }
 
             if ($request->hasFile('logoImage')) {
-                Storage::disk('menu-images')->delete($store->logoImage);
+                Storage::disk('restaurant-images')->delete($store->logoImage);
                 $store->logoImage = $request->file('logoImage')->store($store->slug, 'restaurant-images');
             }
 
@@ -271,17 +273,17 @@ class StoreController extends Controller
                 $store->previewDescription = $request->previewDescription;
 
             if ($request->hasFile('previewImage')) {
-                Storage::disk('menu-images')->delete($store->previewImage);
+                Storage::disk('restaurant-images')->delete($store->previewImage);
                 $store->previewImage = $request->file('previewImage')->store($store->slug, 'restaurant-images');
             }
 
             if ($request->hasFile('backgroundImage')) {
-                Storage::disk('menu-images')->delete($store->backgroundImage);
+                Storage::disk('restaurant-images')->delete($store->backgroundImage);
                 $store->backgroundImage = $request->file('backgroundImage')->store($store->slug, 'restaurant-images');
             }
 
             if ($request->hasFile('logoImage')) {
-                Storage::disk('menu-images')->delete($store->logoImage);
+                Storage::disk('restaurant-images')->delete($store->logoImage);
                 $store->logoImage = $request->file('logoImage')->store($store->slug, 'restaurant-images');
             }
 
@@ -321,15 +323,11 @@ class StoreController extends Controller
     public function delete($id)
     {
         try {
-            $user = $this->validateSession();
+            $store = Store::find($id);
 
-            if ($user->role_id !== User::ROLE_ADMIN) {
-                return $this->returnError('You don\'t have permission to delete this task');
-            }
-
-            $task = Task::find($id);
-
-            $task->delete();
+            Storage::disk('restaurant-images')->deleteDirectory($store->slug);
+            Storage::disk('menu-images')->deleteDirectory($store->slug);
+            $store->delete();
 
             return $this->returnSuccess();
         } catch (\Exception $e) {

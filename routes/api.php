@@ -36,8 +36,12 @@ Route::group(['namespace' => 'Api', 'middleware' => 'jwt'], function () {
 
     /** Routes you can access as admin only  */
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
-        Route::post('/store', 'StoreController@create');
-        Route::post('/store/{id}', 'StoreController@update');
+
+        Route::group(['prefix' => 'store'], function () {
+            Route::post('/', 'StoreController@create');
+            Route::patch('/{id}', 'StoreController@update');
+            Route::delete('/{id}', 'StoreController@delete');
+        });
         Route::get('/users', 'AdminController@getUsers');
         Route::group(['prefix' => 'user'], function () {
             Route::post('/', 'AdminController@createUser');
