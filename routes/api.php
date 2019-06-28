@@ -21,6 +21,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/register', 'UserController@register');
     Route::post('/forgot-password', 'UserController@forgotPassword');
     Route::post('/change-password', 'UserController@changePassword');
+    Route::post('/restaurant/order', 'OrderController@createOrder');
     Route::get('/stores-complete', 'StoreController@getStores');
     Route::get('/stores', 'StoreController@getStoresPreview');
     Route::get('/store-complete/{url}', 'StoreController@getStoreComplete');
@@ -59,6 +60,10 @@ Route::group(['namespace' => 'Api', 'middleware' => 'jwt'], function () {
             Route::post('/add', 'MenuController@createMenu');
             Route::patch('/{id}', 'MenuController@updateMenu');
             Route::delete('/{id}', 'MenuController@deleteMenu');
+        });
+        Route::group(['prefix' => 'order'], function () {
+            Route::patch('/{id}', 'OrderController@updateOrder');
+            Route::delete('/{id}', 'OrderController@deleteOrder');
         });
     });
 });

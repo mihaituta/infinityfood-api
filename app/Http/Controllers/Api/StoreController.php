@@ -39,7 +39,18 @@ class StoreController extends Controller
     {
         try {
             $stores = Store::all('name','slug','city','previewDescription','previewImage');
-            return $this->returnSuccess($stores);
+
+            $cities = [];
+
+            foreach ($stores as $key => $store) {
+                $cities[$key] = $store->city;
+            }
+
+            $uniqueValues = array_unique((array)$cities);
+
+            sort($uniqueValues);
+
+            return $this->returnSuccess(['restaurants'=>$stores,'cities' => $uniqueValues]);
         } catch (\Exception $e) {
             return $this->returnError($e->getMessage());
         }
@@ -160,7 +171,7 @@ class StoreController extends Controller
     }
 
     /**
-     * Update a task
+     * Update restaurant
      *
      * @param Request $request
      * @param $id

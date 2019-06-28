@@ -70,16 +70,6 @@ class User extends Model implements JwtPayloadInterface
     }
 
     /**
-     * User assigned tasks
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function tasks()
-    {
-        return $this->hasMany('App/Task', 'assign', 'id');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function store()
