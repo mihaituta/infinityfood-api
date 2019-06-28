@@ -54,6 +54,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'jwt'], function () {
     /** Routes you can access as staff member only */
     Route::group(['prefix' => 'staff', 'middleware' => 'staff'], function () {
         Route::get('/menus', 'MenuController@getMenus');
+        Route::get('/orders', 'OrderController@getOrders');
         Route::get('/store', 'StoreController@getStore');
         Route::patch('/store', 'StoreController@staffUpdateStore');
         Route::group(['prefix' => 'menu'], function () {
