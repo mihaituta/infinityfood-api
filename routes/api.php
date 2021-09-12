@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 
 /** Routes that doesn't require auth */
 Route::group(['namespace' => 'Api'], function () {
-    /** Routes you can access as staff member only */
     Route::post('staff/login', 'UserController@staffLogin');
     Route::post('/login', 'UserController@login');
     Route::post('/register', 'UserController@register');

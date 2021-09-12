@@ -13,9 +13,19 @@ class Store extends Model
      */
     protected $fillable = [
         'name',
-        'url',
+        'slug',
         'user_id',
-        'images_id'
+        'city',
+        'previewDescription',
+        'previewImage',
+        'backgroundImage',
+        'logoImage',
+        'contactText',
+        'phone1',
+        'phone2',
+        'mail1',
+        'mail2',
+        'aboutText',
     ];
 
     /**

@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 class StoreController extends Controller
 {
     /**
-     * Get stores list
+     * Get restaurants complete
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -31,7 +31,7 @@ class StoreController extends Controller
     }
 
     /**
-     * Get stores previews
+     * Get restaurant previews
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -57,7 +57,7 @@ class StoreController extends Controller
     }
 
     /**
-     * Get store by id
+     * Get restaurant by id
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -97,7 +97,7 @@ class StoreController extends Controller
     }
 
     /**
-     * Create a store
+     * Create restaurant
      *
      * @param Request $request
      *
@@ -252,6 +252,13 @@ class StoreController extends Controller
         }
     }
 
+    /**
+     * Staff member update his restaurant
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function staffUpdateStore(Request $request)
     {
         try {

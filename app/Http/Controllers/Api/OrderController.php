@@ -4,17 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Order;
 use App\Store;
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-
-use Illuminate\Support\Str;
-
 class OrderController extends Controller
 {
     /**
-     * Get stores list
+     * Get orders
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -33,7 +29,7 @@ class OrderController extends Controller
 
 
     /**
-     * Create a store
+     * Create an order
      *
      * @param Request $request
      *
@@ -106,7 +102,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Update restaurant
+     * Update order
      *
      * @param Request $request
      * @param $id

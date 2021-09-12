@@ -22,8 +22,8 @@ class User extends Model implements JwtPayloadInterface
     /** @var int */
     const ROLE_STAFF = 'Staff';
 
-    /** @var int */
-    const ROLE_USER = 'User';
+//    /** @var int */
+//    const ROLE_USER = 'User';
 
     /**
      * The attributes that are mass assignable.

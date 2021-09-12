@@ -62,6 +62,7 @@ class UserController extends Controller
             return $this->returnError($e->getMessage());
         }
     }
+
     /**
      * Register user
      *

@@ -13,13 +13,13 @@ class Menu extends Model
     const TYPE_MAIN = 'Fel principal';
 
     /** @var string */
-    const TYPE_DESSERT = 'Desert';
-
-    /** @var string */
     const TYPE_FASTFOOD = 'Fastfood';
 
     /** @var string */
     const TYPE_PIZZA = 'Pizza';
+
+    /** @var string */
+    const TYPE_DESSERT = 'Desert';
 
     /** @var string */
     const TYPE_DRINK = 'Băuturi';
