@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         if (!Schema::hasTable('orders')) {
             Schema::create('orders', function (Blueprint $table) {
-                $table->bigIncrements('id');
+                $table->increments('id');
                 $table->timestamps();
                 $table->tinyInteger('status');
                 $table->float('totalPrice');
@@ -30,7 +30,7 @@ class CreateOrdersTable extends Migration
                 $table->string('apartament', 100);
                 $table->string('interfon', 100);
                 $table->text('informations');
-
+                $table->integer('store_id')->unsigned();
                 $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             });
         }

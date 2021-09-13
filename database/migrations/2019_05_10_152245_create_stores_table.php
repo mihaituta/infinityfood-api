@@ -15,7 +15,7 @@ class CreateStoresTable extends Migration
     {
         if (!Schema::hasTable('stores')) {
             Schema::create('stores', function (Blueprint $table) {
-                $table->bigIncrements('id');
+                $table->increments('id');
                 $table->timestamps();
                 $table->string('name', 100);
                 $table->string('slug', 100);

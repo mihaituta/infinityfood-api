@@ -15,14 +15,14 @@ class CreateMenusTable extends Migration
     {
         if (!Schema::hasTable('menus')) {
             Schema::create('menus', function (Blueprint $table) {
-                $table->bigIncrements('id');
+                $table->increments('id');
                 $table->timestamps();
                 $table->string('name', 100);
                 $table->text('description');
                 $table->float('price');
                 $table->string('image', 100);
                 $table->string('type', 50);
-                $table->integer('store_id');
+                $table->integer('store_id')->unsigned();
                 $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             });
         }
