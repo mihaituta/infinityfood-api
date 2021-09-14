@@ -24,12 +24,12 @@ class CreateOrdersTable extends Migration
                 $table->string('phone', 100);
                 $table->string('city', 50);
                 $table->string('adresa', 200);
-                $table->string('bloc', 100);
-                $table->string('scara', 100);
-                $table->string('etaj', 100);;
-                $table->string('apartament', 100);
-                $table->string('interfon', 100);
-                $table->text('informations');
+                $table->string('bloc', 100)->nullable();
+                $table->string('scara', 100)->nullable();
+                $table->string('etaj', 100)->nullable();
+                $table->string('apartament', 100)->nullable();
+                $table->string('interfon', 100)->nullable();
+                $table->text('informations')->nullable();
                 $table->integer('store_id')->unsigned();
                 $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             });

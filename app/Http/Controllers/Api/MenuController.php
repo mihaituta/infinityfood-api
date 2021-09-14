@@ -74,13 +74,12 @@ class MenuController extends Controller
 
             }
 
-
             $menu = new Menu();
 
             $menu->name = $request->name;
             $menu->description = $request->description;
             $menu->price = $request->price;
-            $menu->image = $request->file('image')->store($store->slug, 'menu-images');
+            $menu->image = $request->file('image')->storeOnCloudinary($store->slug . '/menu-images')->getPublicId();
             $menu->type = $request->type;
             $menu->store_id = $store->id;
 
@@ -137,8 +136,8 @@ class MenuController extends Controller
             }
 
             if ($request->hasFile('image')) {
-                Storage::disk('menu-images')->delete($menu->image);
-                $menu->image = $request->file('image')->store($store->slug, 'menu-images');
+                cloudinary()->destroy($menu->image);
+                $menu->image = $request->file('image')->storeOnCloudinary($store->slug . '/menu-images')->getPublicId();
             }
 
             if ($request->has('type')) {
@@ -169,8 +168,7 @@ class MenuController extends Controller
             if ($menu->store_id !== $store->id) {
                 return $this->returnError('You don\'t have permission to delete this menu');
             }
-
-            Storage::disk('menu-images')->delete($menu->image);
+            cloudinary()->destroy($menu->image);
             $menu->delete();
 
             return $this->returnSuccess();

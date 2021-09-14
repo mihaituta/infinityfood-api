@@ -22,6 +22,7 @@ class CreateStoresTable extends Migration
                 $table->integer('user_id');
                 $table->text('city');
                 $table->string('previewDescription', 200);
+                $table->text('aboutText');
                 $table->string('previewImage', 100);
                 $table->string('backgroundImage', 100);
                 $table->string('logoImage', 100);
@@ -30,7 +31,6 @@ class CreateStoresTable extends Migration
                 $table->string('phone2', 50);
                 $table->string('mail1', 50);
                 $table->string('mail2', 50);
-                $table->text('aboutText');
             });
         }
     }

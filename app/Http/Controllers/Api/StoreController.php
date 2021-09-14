@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Str;
 
+use Cloudinary\Api\Admin\AdminApi;
+
 class StoreController extends Controller
 {
     /**
@@ -140,28 +142,15 @@ class StoreController extends Controller
             $store->user_id = $request->user_id;
             $store->city = $request->city;
             $store->previewDescription = $request->previewDescription;
-            $store->previewImage = $request->file('previewImage')->store($store->slug, 'restaurant-images');
-            $store->backgroundImage = $request->file('backgroundImage')->store($store->slug, 'restaurant-images');
-
-            if ($request->has('logoImage'))
-                $store->logoImage = $request->file('logoImage')->store($store->slug, 'restaurant-images');
-
-            if ($request->has('contactText'))
-                $store->contactText = $request->contactText;
-
+            $store->previewImage = $request->file('previewImage')->storeOnCloudinary($store->slug . '/restaurant-images')->getPublicId();
+            $store->backgroundImage = $request->file('backgroundImage')->storeOnCloudinary($store->slug . '/restaurant-images')->getPublicId();
+            $store->logoImage = $request->file('logoImage')->storeOnCloudinary($store->slug . '/restaurant-images')->getPublicId();
+            $store->contactText = $request->contactText;
             $store->phone1 = $request->phone1;
-
-            if ($request->has('phone2'))
-                $store->phone2 = $request->phone2;
-
+            $store->phone2 = $request->phone2;
             $store->mail1 = $request->mail1;
-
-            if ($request->has('mail2'))
-                $store->mail2 = $request->mail2;
-
-            if ($request->has('aboutText'))
-                $store->aboutText = $request->aboutText;
-
+            $store->mail2 = $request->mail2;
+            $store->aboutText = $request->aboutText;
             $store->save();
 
             return $this->returnSuccess();
@@ -210,20 +199,20 @@ class StoreController extends Controller
 
             if ($request->has('previewDescription'))
                 $store->previewDescription = $request->previewDescription;
-
+        
             if ($request->hasFile('previewImage')) {
-                Storage::disk('restaurant-images')->delete($store->previewImage);
-                $store->previewImage = $request->file('previewImage')->store($store->slug, 'restaurant-images');
+                cloudinary()->destroy($store->previewImage);
+                $store->previewImage = $request->file('previewImage')->storeOnCloudinary($store->slug . '/restaurant-images')->getPublicId();
             }
 
             if ($request->hasFile('backgroundImage')) {
-                Storage::disk('restaurant-images')->delete($store->backgroundImage);
-                $store->backgroundImage = $request->file('backgroundImage')->store($store->slug, 'restaurant-images');
+                cloudinary()->destroy($store->backgroundImage);
+                $store->backgroundImage = $request->file('backgroundImage')->storeOnCloudinary($store->slug . '/restaurant-images')->getPublicId();
             }
 
             if ($request->hasFile('logoImage')) {
-                Storage::disk('restaurant-images')->delete($store->logoImage);
-                $store->logoImage = $request->file('logoImage')->store($store->slug, 'restaurant-images');
+                cloudinary()->destroy($store->logoImage);
+                $store->logoImage = $request->file('logoImage')->storeOnCloudinary($store->slug . '/restaurant-images')->getPublicId();
             }
 
             if ($request->has('contactText'))
@@ -291,18 +280,18 @@ class StoreController extends Controller
                 $store->previewDescription = $request->previewDescription;
 
             if ($request->hasFile('previewImage')) {
-                Storage::disk('restaurant-images')->delete($store->previewImage);
-                $store->previewImage = $request->file('previewImage')->store($store->slug, 'restaurant-images');
+                cloudinary()->destroy($store->previewImage);
+                $store->previewImage = $request->file('previewImage')->storeOnCloudinary($store->slug . '/restaurant-images')->getPublicId();
             }
-
+    
             if ($request->hasFile('backgroundImage')) {
-                Storage::disk('restaurant-images')->delete($store->backgroundImage);
-                $store->backgroundImage = $request->file('backgroundImage')->store($store->slug, 'restaurant-images');
+                cloudinary()->destroy($store->backgroundImage);
+                $store->backgroundImage = $request->file('backgroundImage')->storeOnCloudinary($store->slug . '/restaurant-images')->getPublicId();
             }
-
+    
             if ($request->hasFile('logoImage')) {
-                Storage::disk('restaurant-images')->delete($store->logoImage);
-                $store->logoImage = $request->file('logoImage')->store($store->slug, 'restaurant-images');
+                cloudinary()->destroy($store->logoImage);
+                $store->logoImage = $request->file('logoImage')->storeOnCloudinary($store->slug . '/restaurant-images')->getPublicId();
             }
 
             if ($request->has('contactText'))
@@ -343,8 +332,11 @@ class StoreController extends Controller
         try {
             $store = Store::find($id);
 
-            Storage::disk('restaurant-images')->deleteDirectory($store->slug);
-            Storage::disk('menu-images')->deleteDirectory($store->slug);
+            $api = new AdminApi();
+            $api->deleteAssetsByPrefix($store->slug. '/restaurant-images');
+            $api->deleteAssetsByPrefix($store->slug. '/menu-images');
+            $api->deleteFolder($store->slug);
+
             $store->delete();
 
             return $this->returnSuccess();
