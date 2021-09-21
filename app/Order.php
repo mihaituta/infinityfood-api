@@ -24,13 +24,11 @@ class Order extends Model
         'name',
         'phone',
         'city',
-        'adresa',
-        'bloc',
-        'scara',
-        'etaj',
-        'apartament',
-        'interfon',
-        'informations',
+        'address',
+        'houseNr',
+        'floor',
+        'apartment',
+        'information',
         'store_id'
     ];
 

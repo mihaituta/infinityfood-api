@@ -23,19 +23,17 @@ class CreateOrdersTable extends Migration
                 $table->string('name', 100);
                 $table->string('phone', 100);
                 $table->string('city', 50);
-                $table->string('adresa', 200);
-                $table->string('bloc', 100)->nullable();
-                $table->string('scara', 100)->nullable();
-                $table->string('etaj', 100)->nullable();
-                $table->string('apartament', 100)->nullable();
-                $table->string('interfon', 100)->nullable();
-                $table->text('informations')->nullable();
+                $table->string('address', 200);
+                $table->string('houseNr', 100)->nullable();
+                $table->string('floor', 100)->nullable();
+                $table->string('apartment', 100)->nullable();
+                $table->text('information')->nullable();
                 $table->integer('store_id')->unsigned();
                 $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             });
         }
     }
-
+    
     /**
      * Reverse the migrations.
      *

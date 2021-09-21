@@ -15,7 +15,7 @@ class StoresSeeder extends Seeder
         // (new UploadApi())->upload('public\storage\restaurant-images\la-familiar\preview.png', ['folder' => 'la-familiar/restaurant-images/']);
 
         $storesList = ['Demo', 'La Familiar', 'Ramen Korewa', 'Pizza Hut', 'Spartan', "McDonald's", "Domino's Pizza", 'KFC', 'Pizza Delivery'];
-        $cities = ['Craiova', 'București', 'Cluj', 'Iasi'];
+        $cities = ['Craiova', 'Bucharest', 'Cluj', 'Iasi'];
 
         //local database ids for dev and testing
         // $userIds = ['2', '4', '5', '6', '7', '8', '9', '10', '11'];

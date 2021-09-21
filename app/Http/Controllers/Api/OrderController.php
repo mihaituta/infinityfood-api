@@ -44,13 +44,11 @@ class OrderController extends Controller
                 'name' => 'required',
                 'phone' => 'required',
                 'city' => 'required',
-                'adresa' => 'required',
-                'bloc',
-                'scara',
-                'etaj',
-                'apartament',
-                'interfon',
-                'informations',
+                'address' => 'required',
+                'houseNr',
+                'floor',
+                'apartment',
+                'information',
                 'store_id' => 'required',
             ];
 
@@ -71,27 +69,21 @@ class OrderController extends Controller
             $order->name = $request->name;
             $order->phone = $request->phone;
             $order->city = $request->city;
-            $order->adresa = $request->adresa;
+            $order->address = $request->address;
             $order->store_id = $request->store_id;
 
+            if ($request->has('houseNr'))
+                $order->houseNr = $request->houseNr;
 
-            if ($request->has('bloc'))
-                $order->bloc = $request->bloc;
+            if ($request->has('floor'))
+                $order->floor = $request->floor;
 
-            if ($request->has('scara'))
-                $order->scara = $request->scara;
+            if ($request->has('apartment'))
+                $order->apartment = $request->apartment;
 
-            if ($request->has('etaj'))
-                $order->etaj = $request->etaj;
 
-            if ($request->has('apartament'))
-                $order->apartament = $request->apartament;
-
-            if ($request->has('interfon'))
-                $order->interfon = $request->interfon;
-
-            if ($request->has('informations'))
-                $order->informations = $request->informations;
+            if ($request->has('information'))
+                $order->information = $request->information;
 
             $order->save();
 
