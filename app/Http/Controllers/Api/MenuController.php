@@ -31,7 +31,7 @@ class MenuController extends Controller
 
             $uniqueValues = array_unique((array)$types);
 
-            $order = ['Felul întâi', 'Fel principal', 'Fastfood', 'Pizza', 'Desert', 'Băuturi'];
+            $order = ['Starter', 'Main Course', 'Fastfood', 'Pizza', 'Dessert', 'Drinks'];
 
             $orderedTypes = array_values(array_intersect($order, $uniqueValues));
 
