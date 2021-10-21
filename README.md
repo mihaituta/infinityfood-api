@@ -12,38 +12,32 @@ This is the **back-end API** part of the project.
 
 <a href="https://infinityfood.netlify.app" rel="noreferrer" target="_blank">Live demo</a>
 
-Administration page can be accessed
-<a href="https://infinityfood.netlify.app/login" rel="noreferrer" target="_blank">here</a> 
-or by adding **/login** after the url.
-
-Demo **admin** account(to create a restaurant): email: admin@gmail.com password: 123123.
+**Admin** account (to create restaurants and users): **admin@gmail.com**, password: **123123**.
 <br>
-Demo **staff** account(to manage a restaurant): email: staff@gmail.com password: 123123.
+**Staff** account (to manage a restaurant): **staff@gmail.com**, password: **123123**.
 
 # Technologies
 - **PHP**
 - **Laravel**
 - **MySQL**
 - **Cloudinary** to manage images
-- It is is hosted on **Heroku** so requests may take a few seconds
+- It is hosted on **Heroku** so the **first load** may take a few seconds
 
 # Functionalities
 **InfinityFood** is a website for presenting and managing restaurants.
 <br>
 **Users** can search for restaurants by name, filter restaurants by city, and order food.
 
-The website also has an administration section, which can only be accessed via the URL link, it does not exist on the main website.
-
-There are two types of users, administrators and staff members.
+There are two types of users, **administrators** and **staff** members.
 
 **Administrators** can:
-- Add, modify or delete restaurants
-- Add, modify, or delete other admin or staff accounts
+- Add, modify or delete **restaurants**
+- Add, modify, or delete other **admin** or **staff** accounts
 
 **Staff members** can:
-- Manage the website of the restaurant they belong to, they can change everything related to the restaurant page, title, images, texts, phone numbers, emails
-- Add, modify, or delete the restaurant menus
-- See, change status(delivering/delivered) and delete the restaurant orders maded by users
+- Manage the website of the **restaurant** they belong to, they can change everything related to the restaurant page, title, images, texts, phone numbers, emails
+- Add, modify, or delete the restaurant **menus**
+- See, change status(delivering/delivered) and delete the restaurant **orders** made by users
 # Installation
 
 Project setup:

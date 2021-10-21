@@ -208,10 +208,10 @@ class MenusSeeder extends Seeder
                 'image' => 'demo/menu-images/' . $menuSlug,
 
                 //local database id for dev and testing
-                // 'store_id' => '1',
+                'store_id' => '1',
 
                 //clearDB heroku store id
-                'store_id' => '5',
+                // 'store_id' => '5',
             ]);
 
             Menu::create([
@@ -222,10 +222,10 @@ class MenusSeeder extends Seeder
                 'image' => 'la-familiar/menu-images/' . $menuSlug,
 
                 //local database id for dev and testing
-                // 'store_id' => '2',
+                'store_id' => '2',
 
                 //clearDB heroku store id
-                'store_id' => '15',
+                // 'store_id' => '15',
             ]);
         }
     }

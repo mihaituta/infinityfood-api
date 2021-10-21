@@ -18,10 +18,10 @@ class StoresSeeder extends Seeder
         $cities = ['Craiova', 'Bucharest', 'Cluj', 'Iasi'];
 
         //local database ids for dev and testing
-        // $userIds = ['2', '4', '5', '6', '7', '8', '9', '10', '11'];
+        $userIds = ['2', '4', '5', '6', '7', '8', '9', '10', '11'];
 
         //clearDB heroku user ids
-        $userIds = ['15', '35', '45', '55', '65', '75', '85', '95', '105'];
+        // $userIds = ['15', '35', '45', '55', '65', '75', '85', '95', '105'];
 
         $previewDescriptions = [
             'Fast-food | Drinks | Desert',
