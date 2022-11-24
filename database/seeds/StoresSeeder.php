@@ -74,14 +74,14 @@ class StoresSeeder extends Seeder
                 'backgroundImage' => $storeSlug . '/restaurant-images/backgroundImage',
                 'logoImage' => $storeSlug . '/restaurant-images/logoImage',
 
-                'contactText' => "We enjoy talking with those who order food on " . $store . " because that's how we find out what we should do better.That's why we encourage you to tell us what you like andwhat you don't when you order food from us.",
+                'contactText' => "We enjoy talking with those who order food on " . $store . " because that's how we find out what we should do better.That's why we encourage you to tell us what you like and what you don't when you order food from us.",
 
                 'phone1' => '0761234567',
                 'phone2' => '0763034589',
                 'mail1' => 'support@' . $storeSlug . '.ro',
                 'mail2' => 'client@' . $storeSlug . '.ro',
 
-                'aboutText' => "What does " . $store . " offer? Possibility to enjoy deliciousdishes from restaurants in your area. A wide range of deliciousdishes are at your disposal with just a few clicks."
+                'aboutText' => "What does " . $store . " offer? Possibility to enjoy delicious dishes from restaurants in your area. A wide range of delicious dishes are at your disposal with just a few clicks."
             ]);
         }
     }

@@ -35,7 +35,7 @@ class OrdersSeeder extends Seeder
         Order::create([
             'status' => 0,
             'totalPrice' => '345.44',
-            'menus' => '2x Chiken breast on stick, 2x Dark cake, 2x Apple pie, 1x Strongbow Gold Apple 330ml, 1x Water Bucovina 500ml',
+            'menus' => '2x Chicken breast on stick, 2x Dark cake, 2x Apple pie, 1x Strongbow Gold Apple 330ml, 1x Water Bucovina 500ml',
             'name' => 'Demo name',
             'phone' => '3425453453',
             'city' => 'Bucharest',

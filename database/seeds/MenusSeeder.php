@@ -28,7 +28,7 @@ class MenusSeeder extends Seeder
 
             //main course x9 7-15
             'Grilled chicken legs',
-            'Chiken breast on stick',
+            'Chicken breast on stick',
             'Pork collar and polenta',
             'Sweet pork ribs with potatoes',
             'Grilled pork tenderloin in sauce',
@@ -51,7 +51,7 @@ class MenusSeeder extends Seeder
             //pizza x8 25-32
             'Pizza quattro stagioni',
             'Pizza Diavola',
-            'Piza Carnivora',
+            'Pizza Carnivora',
             'Pizza Hot Chorizo',
             'Pizza Light',
             'Pizza Rustic',
@@ -87,43 +87,43 @@ class MenusSeeder extends Seeder
 
         $menusDescription = [
             //starter
-            'Chiken, garlic, cheese, ketchup, eggs, black pepper, salt, flour',
+            'Chicken, garlic, cheese, ketchup, eggs, black pepper, salt, flour',
             'Zucchini, flour, eggs, mustard, black pepper, salt, garlic, sunflower oil',
             'Tomatoes, cucumber, paprika, cheese, olives, black pepper, sunflower oil',
-            'Chiken, cheese, toast, garlic, mayo sauce, sunflower oil, white pepper, salt',
+            'Chicken, cheese, toast, garlic, mayo sauce, sunflower oil, white pepper, salt',
             'Beans, onions, garlic',
             'Eggplant, onions, tomatoes',
             'Cheese, eggs, flour, sunflower oil, salt, sesame',
 
             //main course
-            'Chiken legs, black pepper, salt',
-            'Chiken, mushrooms, paprika, tomatoes, onions',
+            'Chicken legs, black pepper, salt',
+            'Chicken, mushrooms, paprika, tomatoes, onions',
             'Pork collar, onions, mushrooms, garlic, sunflower oil, salt, black pepper',
             'Pork ribs, potatoes, bbq sauce, garlic, black pepper, salt',
             'Pork tenderloin, paprika sauce, garlic, black pepper, salt',
             'Minced meat, rice, pickled cabbage, onions',
-            'Chiken, eggs, black pepper, salt, flour',
+            'Chicken, eggs, black pepper, salt, flour',
             'Turkey, eggs, black pepper, salt, flour',
-            'Chiken, onions, paprika, tomato sauce, mushrooms, garlic',
+            'Chicken, onions, paprika, tomato sauce, mushrooms, garlic',
 
             //fastfood
             "Bacon, lettuce, tomatoes, pickles, Jack's sauce, fries",
             'Beef, cheese, bacon, onions, tomatoes, lettuce, pickles, bbq sauce, fries',
-            'Chiken or pork and cow, fries, lettuce, tomatoes, pickles, sour sauce, garlic sauce, veggies sauce, olive sauce, tzatziki, pita',
-            'Chiken or pork and cow, pizza sauce, butter, yogurt, paprika, tomatoes, pita',
+            'Chicken or pork and cow, fries, lettuce, tomatoes, pickles, sour sauce, garlic sauce, veggies sauce, olive sauce, tzatziki, pita',
+            'Chicken or pork and cow, pizza sauce, butter, yogurt, paprika, tomatoes, pita',
             'Schnitzel, fries, garlic sauce, white salad, pita',
-            'Crispy chiken, fries, lettuce, garlic sauce, sour sauce, pita',
-            'Chiken or pork and cow, lettuce, tomatoes, pickles, onions, tomatoes, garlic sauce, olives sauce, sour-sweet sauce, veggies sauce, pita',
-            'Chiken or pork and cow, lettuce, tomatoes, pickles, red onions, tomatoes, garlic sauce, olives sauce, sour-sweet sauce, veggies sauce, pita',
-            'Chiken or pork and cow, lettuce, pickles, fries, garlic sauce, sour-sweet sauce, pita',
+            'Crispy chicken, fries, lettuce, garlic sauce, sour sauce, pita',
+            'Chicken or pork and cow, lettuce, tomatoes, pickles, onions, tomatoes, garlic sauce, olives sauce, sour-sweet sauce, veggies sauce, pita',
+            'Chicken or pork and cow, lettuce, tomatoes, pickles, red onions, tomatoes, garlic sauce, olives sauce, sour-sweet sauce, veggies sauce, pita',
+            'Chicken or pork and cow, lettuce, pickles, fries, garlic sauce, sour-sweet sauce, pita',
 
             //pizza
             '100% mozzarella, ham, chorizo, mushrooms, green paprika',
-            'Tomato sauce, bacon, praga ham, mushrooms, olives, paprika, mozzarella',
-            'Tomato sauce, bacon, praga ham, sausages, egg, tomatoes, mozzarella',
+            'Tomato sauce, bacon, prague ham, mushrooms, olives, paprika, mozzarella',
+            'Tomato sauce, bacon, prague ham, sausages, egg, tomatoes, mozzarella',
             'Chorizo, tomatoes, onions, paprika',
             'Paprika, onions, tomatoes, corn, mushrooms',
-            'Chiken, olives, onions, paprika',
+            'Chicken, olives, onions, paprika',
             'Tomato sauce, mozzarella, parma ham, corn, mushrooms',
             'Tomato sauce, cheese, ham, jalapenos',
 
