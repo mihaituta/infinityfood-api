@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4.9 || ^8.0",
+        "php": "^7.4.9",
         "barryvdh/laravel-cors": "^0.11.3",
         "cloudinary-labs/cloudinary-laravel": "^1.0",
         "fideloper/proxy": "^4.0",
